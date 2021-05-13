@@ -1,0 +1,30 @@
+{% extends 'news/default.html' %}
+{% load custom_filters %}
+{% block title %}
+News
+{% endblock title %}
+
+{% block content %}
+<div class="h3 p-3 mb-2 bg-secondary text-white">{{ post.post_title|censor }}</div>
+<form method = "POST" action = "{% url 'subscribe' %}">
+    {% csrf_token %}
+    {% for category in post.post_category.values %}
+    Категория: {{ category.category }}
+    {% if user.is_authenticated %}
+
+    <button type="submit" name = "subs" value="{{category.id}}">Подписаться</button>
+
+    {% endif %}
+    {% endfor %}
+</form>
+<br>
+
+    <p class="text-end"><small>{{ post.post_date_time }}</small></p>
+    <p class="lh-sm">{{ post.post_text|censor }}</p>
+
+    <a href="{% url 'edit' post.id %}">Редактировать</a>
+    <a href="{% url 'delete' post.id %}">Удалить</a>
+    <a href="{% url 'news' %}">Назад</a>
+
+
+{% endblock content %}

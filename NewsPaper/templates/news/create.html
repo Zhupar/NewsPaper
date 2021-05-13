@@ -1,0 +1,17 @@
+{% extends 'news/default.html' %}
+
+{% block title %} Добавить/Редактировать пост {% endblock title %}
+
+{% block content %}
+<h3>Добавить/Редактировать</h3>
+<form method="POST">
+    {% csrf_token %}
+    <div class="row g-3 align-items-center">
+        {{ form }} <!-- Теперь нам нужна только готовая форма и кнопка -->
+            <input type="submit" value="Сохранить">
+    </div>
+
+</form>
+
+<a href="{% url 'news'  %}">Отмена</a>
+{% endblock content %}

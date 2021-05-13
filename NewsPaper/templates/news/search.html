@@ -1,0 +1,54 @@
+{% extends 'news/default.html' %}
+{% load custom_filters %}
+
+{% block title %}
+News
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим все товары -->
+{% block content %}
+<a href="{% url 'news' %}">Назад</a>
+
+<form method="GET">
+
+        <div class ="col form-control ">
+            {{ filter.form }}<!-- Форму от фильтров за нас сделает django. А вот кнопку, увы придётся делать самому -->
+            <input type="submit" class="btn btn-primary" value="Найти">
+        </div>
+
+
+
+</form>
+
+
+{% for post in filter.qs%}
+    <h3 class = "text-center fw-light">{{ post.post_title|censor }}</h3>
+    <p class="text-end"><small>{{ post.post_date_time }}</small></p>
+    <p class="lh-sm">{{ post.post_text|censor|truncatewords:50  }}</p>
+    <hr>
+{% endfor %}
+
+{% if is_paginated %}
+
+    {% if page_obj.has_previous %}
+        <a href="?page=1">First</a>
+        <a href="?page={{ page_obj.previous_page_number }}"><<<</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <a>{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">>>></a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+
+{% endif %}
+
+
+{% endblock content %}

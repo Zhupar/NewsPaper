@@ -1,0 +1,82 @@
+{% extends 'news/default.html'%}
+
+{% load custom_filters %}
+
+{% block title %}
+News
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим все товары -->
+{% block content %}
+{% if request.user.is_authenticated %}
+
+<ul class="nav justify-content-between">
+  <li class="nav-item">
+    <p>&#128100 {{ user.username}}</p>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="accounts/logout/">Выйти</a>
+  </li>
+</ul>
+
+{% if is_not_author %}
+<button> <a class="nav-link" href="/upgrade/"> Стать автором!</a> </button>
+{% endif %}
+    {% else %}
+<ul class="nav justify-content-end">
+    <li class="nav-item">
+    <a class="nav-link" href="accounts/login/">Войти</a>
+    </li>
+</ul>
+
+{% endif %}
+
+
+
+<div class="h3 p-3 mb-2 bg-secondary text-white">All news</div>
+<p class = "text-muted">Статей на сайте: {{ news|length}}</p>
+<br/>
+
+<a href="{% url 'search' %}">Поиск</a>
+<a href="{% url 'add' %}">Добавить</a>
+<br>
+<br>
+{% if news %}
+
+    {% for post in news%}
+
+    <a href="{% url 'post' post.id %}"><h3 class = "text-center fw-light">{{ post.post_title|censor }}</h3></a>
+    <p class="text-end"><small>{{ post.post_date_time }}</small></p>
+    <p class="lh-sm">{{ post.post_text|censor|truncatewords:50  }}</p>
+<hr>
+
+    {% endfor %}
+
+    {% else %}
+<h2> Постов нет </h2>
+{% endif %}
+
+{% if is_paginated %}
+
+    {% if page_obj.has_previous %}
+        <a href="?page=1">First</a>
+        <a href="?page={{ page_obj.previous_page_number }}"><<<</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <a>{{ num }}</a>
+        {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
+            <a href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">>>></a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+
+{% endif %}
+
+
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends 'news/default.html' %}
+{% load custom_filters %}
+{% block title %}
+News
+{% endblock title %}
+
+{% block content %}
+<h2>Вы действительно хотите удалить данную статью?</h2>
+    <div class="h3 p-3 mb-2 bg-secondary text-white">{{ post.post_title|censor }}</div>
+    <p class="text-end"><small>{{ post.post_date_time }}</small></p>
+    <p class="lh-sm">{{ post.post_text|censor }}</p>
+
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Подтвердить"></form>
+    <a href="{% url 'post' post.id %}">Отмена</a>
+{% endblock content %} 
