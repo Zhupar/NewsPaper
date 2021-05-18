@@ -1,4 +1,7 @@
 import logging
+import requests
+import lxml.html
+
 
 from django.conf import settings
 
@@ -10,24 +13,47 @@ from django_apscheduler.jobstores import DjangoJobStore
 from django_apscheduler.models import DjangoJobExecution
 
 from django.contrib.sites.models import Site
-from NewsPaper.news.models import Post
-from NewsPaper.news.signals import last_news
 
 
 logger = logging.getLogger(__name__)
+last = [('test', 'test')]
+
+class Parce:
+    url = 'http://127.0.0.1:8000/'
+    def req(self, url=url):
+        html = requests.get(url).content
+        tree = lxml.html.document_fromstring(html)
+        a = tree.xpath('/html/body/div/a[3]')
+        title = tree.xpath('/html/body/div/a[4]/h3')
+
+        for link in a:
+            current_href = link.get('href')
+            for l in link:
+                current_title = l.text
+            return l.text, url+current_href
+
+def my_job():
+    current = Parce()
+    current = current.req()
+    if last[-1] != current:
+        last.append(current)
 
 
-# наша задача по выводу текста на экран
-def my_job(last_news):
-    message = ''
-    for news in last_news:
-        message += f'{news.post_title}\n {news.post_text[:50]}\n Follow {Site.objects.get_current()}:8000{news.get_absolute_url()}'
+
+def send_email():
+    message = 'Dear Subscriber!\n Please, get the latest news:\n '
+    for l in last:
+        message+= f'{l[0]} --- Follow link: {l[1]}\n'
+        print(message)
     send_mail(
-        subject=f'Get the latest News',
-        message=message,
-        from_email='zhuparadamova@yandex.ru',
-        recipient_list=['zhuparadamova@gmail.ru',]
+        'The latest news',
+        message,
+        'zhuparadamova@yandex.ru',
+        ['zhuparadamova@gmail.com'],
+        fail_silently=False,
     )
+
+
 
 # функция которая будет удалять неактуальные задачи
 def delete_old_job_executions(max_age=604_800):
@@ -45,13 +71,25 @@ class Command(BaseCommand):
         # добавляем работу нашему задачнику
         scheduler.add_job(
             my_job,
-            trigger=CronTrigger(second="*/604800"),
+            trigger=CronTrigger(second="*/5"),
             # Тоже самое что и интервал, но задача тригера таким образом более понятна django
             id="my_job",  # уникальный айди
             max_instances=1,
             replace_existing=True,
         )
         logger.info("Added job 'my_job'.")
+
+        scheduler.add_job(
+            send_email,
+            trigger=CronTrigger(second="*/15"),
+            # Тоже самое что и интервал, но задача тригера таким образом более понятна django
+            id="send_email",  # уникальный айди
+            max_instances=1,
+            replace_existing=True,
+        )
+        logger.info(
+            "Added weekly job: 'send_email'."
+        )
 
         scheduler.add_job(
             delete_old_job_executions,
@@ -63,6 +101,7 @@ class Command(BaseCommand):
             max_instances=1,
             replace_existing=True,
         )
+
         logger.info(
             "Added weekly job: 'delete_old_job_executions'."
         )
