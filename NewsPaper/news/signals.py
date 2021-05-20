@@ -7,6 +7,7 @@ from .models import Post
 
 @receiver(post_save, sender=Post)
 def notify_managers_appointment(sender, instance, created, **kwargs):
+    message =''
     if created:
         subject = f'{instance.post_title}'
         current_site = Site.objects.get_current()
