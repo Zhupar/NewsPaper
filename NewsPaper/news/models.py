@@ -3,7 +3,7 @@ from django.db import models
 
 news = 'N'
 article = 'A'
-CHOICE = [(news, 'новость'), (article, 'статья')]
+CHOICE = [(news, 'news'), (article, 'article')]
 
 
 class Author(models.Model):

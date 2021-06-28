@@ -6,12 +6,16 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
+# from django.views.decorators.cache import cache_page
+# import logging
 
 from .models import Post, Category
 from .filters import PostFilter
 from .forms import PostForm
 from .tasks import send_email
 
+
+# logger = logging.getLogger(__name__)
 
 class Search(ListView):
     model = Post
@@ -61,7 +65,9 @@ class PostCreateView(PermissionRequiredMixin, CreateView):
     form_class = PostForm
     permission_required = ('news.add_post',)
 
+
     def form_valid(self, form):
+        # logger.error('Add')
         form.save()
         post = Post.objects.get(id=form.instance.pk)
         post_url = f'http://127.0.0.1:8000/{form.instance.pk}'

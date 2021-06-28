@@ -15,17 +15,17 @@ News
     <p>&#128100 {{ user.username}}</p>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="accounts/logout/">Выйти</a>
+    <a class="nav-link" href="accounts/logout/">Log out</a>
   </li>
 </ul>
 
 {% if is_not_author %}
-<button> <a class="nav-link" href="/upgrade/"> Стать автором!</a> </button>
+<button> <a class="nav-link" href="/upgrade/"> Become an author!</a> </button>
 {% endif %}
     {% else %}
 <ul class="nav justify-content-end">
     <li class="nav-item">
-    <a class="nav-link" href="accounts/login/">Войти</a>
+    <a class="nav-link" href="accounts/login/">Log in</a>
     </li>
 </ul>
 
@@ -34,11 +34,11 @@ News
 
 
 <div class="h3 p-3 mb-2 bg-secondary text-white">All news</div>
-<p class = "text-muted">Статей на сайте: {{ news|length}}</p>
+<p class = "text-muted">Articles on the site: {{ news|length}}</p>
 <br/>
 
-<a href="{% url 'search' %}">Поиск</a>
-<a href="{% url 'add' %}">Добавить</a>
+<a href="{% url 'search' %}">Search</a>
+<a href="{% url 'add' %}">Add</a>
 <br>
 <br>
 {% if news %}
@@ -53,7 +53,7 @@ News
     {% endfor %}
 
     {% else %}
-<h2> Постов нет </h2>
+<h2> No posts </h2>
 {% endif %}
 
 {% if is_paginated %}

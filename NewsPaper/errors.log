@@ -1,0 +1,180 @@
+2021-06-27 23:31:05,212 ERROR Internal Server Error: /add/ C:\Zhupar\python 3.8 prog!\lib\site-packages\django\utils\log.py (<class 'ConnectionResetError'>, ConnectionResetError(10054, 'Удаленный хост принудительно разорвал существующее подключение', None, 10054, None), <traceback object at 0x0000025F4B140C40>) 
+Traceback (most recent call last):
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\views\generic\base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\contrib\auth\mixins.py", line 104, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\views\generic\edit.py", line 172, in post
+    return super().post(request, *args, **kwargs)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\views\generic\edit.py", line 142, in post
+    return self.form_valid(form)
+  File "C:\Zhupar\SkillFactory\python course\newNewsPaper\new\NewsPaper\news\views.py", line 82, in form_valid
+    return super().form_valid(form)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\views\generic\edit.py", line 125, in form_valid
+    self.object = form.save()
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\forms\models.py", line 468, in save
+    self.instance.save()
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\db\models\base.py", line 726, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\db\models\base.py", line 774, in save_base
+    post_save.send(
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\dispatch\dispatcher.py", line 180, in send
+    return [
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\dispatch\dispatcher.py", line 181, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+  File "C:\Zhupar\SkillFactory\python course\newNewsPaper\new\NewsPaper\news\signals.py", line 23, in notify_managers_appointment
+    mail_managers(
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\core\mail\__init__.py", line 121, in mail_managers
+    mail.send(fail_silently=fail_silently)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\core\mail\message.py", line 284, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\core\mail\backends\smtp.py", line 102, in send_messages
+    new_conn_created = self.open()
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\core\mail\backends\smtp.py", line 62, in open
+    self.connection = self.connection_class(self.host, self.port, **connection_params)
+  File "C:\Zhupar\python 3.8 prog!\lib\smtplib.py", line 1032, in __init__
+    SMTP.__init__(self, host, port, local_hostname, timeout,
+  File "C:\Zhupar\python 3.8 prog!\lib\smtplib.py", line 253, in __init__
+    (code, msg) = self.connect(host, port)
+  File "C:\Zhupar\python 3.8 prog!\lib\smtplib.py", line 337, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "C:\Zhupar\python 3.8 prog!\lib\smtplib.py", line 1040, in _get_socket
+    new_socket = self.context.wrap_socket(new_socket,
+  File "C:\Zhupar\python 3.8 prog!\lib\ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "C:\Zhupar\python 3.8 prog!\lib\ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "C:\Zhupar\python 3.8 prog!\lib\ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+ConnectionResetError: [WinError 10054] Удаленный хост принудительно разорвал существующее подключение
+2021-06-27 23:31:05,218 ERROR "POST /add/ HTTP/1.1" 500 184566 C:\Zhupar\python 3.8 prog!\lib\site-packages\django\core\servers\basehttp.py None 
+2021-06-28 15:52:20,791 ERROR Internal Server Error: /add/ C:\Zhupar\python 3.8 prog!\lib\site-packages\django\utils\log.py (<class 'kombu.exceptions.OperationalError'>, OperationalError('Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.'), <traceback object at 0x0000015790CE5DC0>) 
+Traceback (most recent call last):
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\redis\connection.py", line 559, in connect
+    sock = self._connect()
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\redis\connection.py", line 615, in _connect
+    raise err
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\redis\connection.py", line 603, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\celery\backends\redis.py", line 117, in reconnect_on_error
+    yield
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\celery\backends\redis.py", line 167, in _consume_from
+    self._pubsub.subscribe(key)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\redis\client.py", line 3580, in subscribe
+    ret_val = self.execute_command('SUBSCRIBE', *iterkeys(new_channels))
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\redis\client.py", line 3466, in execute_command
+    self.connection = self.connection_pool.get_connection(
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\redis\connection.py", line 1192, in get_connection
+    connection.connect()
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\redis\connection.py", line 563, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\redis\connection.py", line 559, in connect
+    sock = self._connect()
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\redis\connection.py", line 615, in _connect
+    raise err
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\redis\connection.py", line 603, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\kombu\connection.py", line 448, in _reraise_as_library_errors
+    yield
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\celery\app\base.py", line 748, in send_task
+    self.backend.on_task_call(P, task_id)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\celery\backends\redis.py", line 343, in on_task_call
+    self.result_consumer.consume_from(task_id)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\celery\backends\redis.py", line 159, in consume_from
+    return self.start(task_id)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\celery\backends\redis.py", line 137, in start
+    self._consume_from(initial_task_id)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\celery\backends\redis.py", line 167, in _consume_from
+    self._pubsub.subscribe(key)
+  File "C:\Zhupar\python 3.8 prog!\lib\contextlib.py", line 131, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\celery\backends\redis.py", line 120, in reconnect_on_error
+    self._ensure(self._reconnect_pubsub, ())
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\celery\backends\redis.py", line 354, in ensure
+    return retry_over_time(
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\kombu\utils\functional.py", line 325, in retry_over_time
+    return fun(*args, **kwargs)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\celery\backends\redis.py", line 105, in _reconnect_pubsub
+    metas = self.backend.client.mget(self.subscribed_to)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\redis\client.py", line 1671, in mget
+    return self.execute_command('MGET', *args, **options)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\redis\client.py", line 898, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\redis\connection.py", line 1192, in get_connection
+    connection.connect()
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\redis\connection.py", line 563, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\views\generic\base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\contrib\auth\mixins.py", line 104, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\views\generic\edit.py", line 172, in post
+    return super().post(request, *args, **kwargs)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\views\generic\edit.py", line 142, in post
+    return self.form_valid(form)
+  File "C:\Zhupar\SkillFactory\python course\newNewsPaper\new\NewsPaper\news\views.py", line 83, in form_valid
+    send_email.delay(send_to=send_to, post_url=post_url, post_text=post.post_text, post_title=post.post_title, send_to_uname=send_to_uname)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\celery\app\task.py", line 421, in delay
+    return self.apply_async(args, kwargs)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\celery\app\task.py", line 561, in apply_async
+    return app.send_task(
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\celery\app\base.py", line 749, in send_task
+    amqp.send_task_message(P, name, message, **options)
+  File "C:\Zhupar\python 3.8 prog!\lib\contextlib.py", line 131, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\kombu\connection.py", line 452, in _reraise_as_library_errors
+    raise ConnectionError(str(exc)) from exc
+kombu.exceptions.OperationalError: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+2021-06-28 15:52:20,807 ERROR "POST /add/ HTTP/1.1" 500 268248 C:\Zhupar\python 3.8 prog!\lib\site-packages\django\core\servers\basehttp.py None 
+2021-06-28 16:45:51,450 ERROR Internal Server Error: /add/ C:\Zhupar\python 3.8 prog!\lib\site-packages\django\utils\log.py (<class 'TypeError'>, TypeError("error() missing 1 required positional argument: 'msg'"), <traceback object at 0x00000177971E6380>) 
+Traceback (most recent call last):
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\views\generic\base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\contrib\auth\mixins.py", line 104, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\views\generic\edit.py", line 172, in post
+    return super().post(request, *args, **kwargs)
+  File "C:\Zhupar\python 3.8 prog!\lib\site-packages\django\views\generic\edit.py", line 142, in post
+    return self.form_valid(form)
+  File "C:\Zhupar\SkillFactory\python course\newNewsPaper\new\NewsPaper\news\views.py", line 70, in form_valid
+    logger.error()
+TypeError: error() missing 1 required positional argument: 'msg'
+2021-06-28 16:45:51,453 ERROR "POST /add/ HTTP/1.1" 500 96290 C:\Zhupar\python 3.8 prog!\lib\site-packages\django\core\servers\basehttp.py None 

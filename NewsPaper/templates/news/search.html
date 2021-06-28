@@ -7,13 +7,13 @@ News
 
 <!-- В контенте на странице мы выводим все товары -->
 {% block content %}
-<a href="{% url 'news' %}">Назад</a>
+<a href="{% url 'news' %}">Back to</a>
 
 <form method="GET">
 
         <div class ="col form-control ">
             {{ filter.form }}<!-- Форму от фильтров за нас сделает django. А вот кнопку, увы придётся делать самому -->
-            <input type="submit" class="btn btn-primary" value="Найти">
+            <input type="submit" class="btn btn-primary" value="Find">
         </div>
 
 
